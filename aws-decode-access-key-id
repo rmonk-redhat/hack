@@ -41,8 +41,10 @@ def main(argv):
         if arg in ("-h", "--help"):
             print(USAGE)
             return 1
-
-        print(f"aws_access_key_id={arg} aws_account_id={account_id(arg):012d}")
+        try:
+            print(f"aws_access_key_id={arg} aws_account_id={account_id(arg):012d}")
+        except binascii.Error:
+            print(f"aws_access_key_id={arg} is invalid (cannot decode)")
 
     return 0
 
